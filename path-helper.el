@@ -102,7 +102,9 @@ read, and paths not already found in the configuration files are
 appended to the list.
 
 As a special case, setting variable 'PATH' also sets `exec-path'."
-  (interactive "sSet environment variable: ")
+  (interactive
+   (list
+    (completing-read "Set environment variable: " path-helper-variables)))
   (let ((filename (concat "/etc/" (downcase variable) "s"))
         (existing-paths (split-string (or (getenv variable) "")
                                       path-separator)))
