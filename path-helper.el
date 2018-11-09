@@ -1,4 +1,4 @@
-;;; path-helper.el --- Set PATH environment variables from configuration files
+;;; path-helper.el --- Set PATH environment variables from config files
 
 ;; Copyright (C) 2018 Arnaud Rouanet
 
