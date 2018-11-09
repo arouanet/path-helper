@@ -1,5 +1,8 @@
 # path-helper
 
+[![MELPA](https://melpa.org/packages/path-helper-badge.svg)](https://melpa.org/#/path-helper)
+[![MELPA Stable](https://stable.melpa.org/packages/path-helper-badge.svg)](https://stable.melpa.org/#/path-helper)
+
 This file replicates the behavior of the
 [path_helper](https://opensource.apple.com/source/shell_cmds/shell_cmds-203/path_helper/)
 utility shipped with macOS, used to augment the `PATH` and `MANPATH` environment
