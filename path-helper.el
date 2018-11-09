@@ -54,6 +54,14 @@
 ;;     (when (memq window-system '(ns mac))
 ;;       (path-helper-setenv-all))
 
+;; Or, if using use-package:
+
+;;     (use-package path-helper
+;;       :if (memq window-system '(mac ns))
+;;       :ensure t
+;;       :config
+;;       (path-helper-setenv-all))
+
 ;; The list `path-helper-variables' is set to ("PATH", "MANPATH") by
 ;; default, but you can customize it to just ("PATH") for example.
 
