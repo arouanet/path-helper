@@ -4,6 +4,7 @@
 
 ;; Author: Arnaud Rouanet <arnaud@rouanet.org>
 ;; Created: 29 Oct 2018
+;; Version: 1.0
 ;; Keywords: tools, unix
 ;; Homepage: https://github.com/arouanet/path-helper
 
