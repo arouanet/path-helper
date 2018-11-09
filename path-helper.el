@@ -110,9 +110,9 @@ As a special case, setting variable 'PATH' also sets `exec-path'."
                                       path-separator)))
     (let ((paths (delete-dups (append (path-helper-paths-from-files filename)
                                       existing-paths))))
-      (setenv variable (mapconcat 'identity paths path-separator))
+      (setenv variable (mapconcat #'identity paths path-separator))
       (when (string-equal "PATH" variable)
-        (setq exec-path (append (mapcar 'file-name-as-directory paths)
+        (setq exec-path (append (mapcar #'file-name-as-directory paths)
                                 (list exec-directory)))))))
 
 ;;;###autoload
