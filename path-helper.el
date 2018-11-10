@@ -1,6 +1,6 @@
 ;;; path-helper.el --- Set PATH environment variables from config files  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2018 Arnaud Rouanet
+;; Copyright (C) 2018  Arnaud Rouanet
 
 ;; Author: Arnaud Rouanet <arnaud@rouanet.org>
 ;; Created: 29 Oct 2018
@@ -11,7 +11,7 @@
 
 ;; This file is not part of GNU Emacs.
 
-;; This file is free software: you can redistribute it and/or modify
+;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
 ;; the Free Software Foundation, either version 3 of the License, or
 ;; (at your option) any later version.
@@ -29,7 +29,7 @@
 ;; This file replicates the behavior of the path_helper(8) utility
 ;; shipped with macOS, used to augment the PATH and MANPATH environment
 ;; variables with path elements read respectively from /etc/paths and
-;; /etc/paths.d/* for PATH, and from /etc/manpaths and /etc/manpaths.d/*
+;; /etc/paths.d/ for PATH, and from /etc/manpaths and /etc/manpaths.d/
 ;; for MANPATH.
 
 ;; This is needed because macOS GUI applications are launched with
@@ -47,7 +47,7 @@
 ;; set elsewhere, such as in the user .profile file, it will not be
 ;; visible to path-helper.  But properly configured macOS packages such
 ;; as MacTeX, which contribute to the PATH by adding a file in
-;; /etc/paths.d, will work as expected.
+;; /etc/paths.d/, will work as expected.
 
 ;; To set all environment variables listed in `path-helper-variables',
 ;; add the following to your init file:
@@ -63,7 +63,7 @@
 ;;       :config
 ;;       (path-helper-setenv-all))
 
-;; The list `path-helper-variables' is set to ("PATH", "MANPATH") by
+;; The list `path-helper-variables' is set to ("PATH" "MANPATH") by
 ;; default, but you can customize it to just ("PATH") for example.
 
 ;; You can also call `path-helper-setenv' directly to set a single
@@ -104,7 +104,7 @@ are ignored."
 ;;;###autoload
 (defun path-helper-setenv (variable)
   "Set the value of environment variable VARIABLE from its associated files.
-Get a list of paths from '/etc/VARIABLEs' and '/etc/VARIABLEs.d'
+Get a list of paths from '/etc/VARIABLEs' and '/etc/VARIABLEs.d/'
 using `path-helper-paths-from-files'.
 
 The existing content of the environment variable VARIABLE is also
