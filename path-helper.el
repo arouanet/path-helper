@@ -1,4 +1,4 @@
-;;; path-helper.el --- Set PATH environment variables from config files
+;;; path-helper.el --- Set PATH environment variables from config files  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2018 Arnaud Rouanet
 
@@ -7,6 +7,7 @@
 ;; Version: 1.0
 ;; Keywords: tools, unix
 ;; Homepage: https://github.com/arouanet/path-helper
+;; Package-Requires: ((emacs "24"))
 
 ;; This file is not part of GNU Emacs.
 
