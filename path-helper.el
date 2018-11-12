@@ -84,7 +84,7 @@
   :type '(repeat (string :tag "Environment variable"))
   :group 'path-helper)
 
-(defun path-helper-paths-from-files (filename)
+(defun path-helper--paths-from-files (filename)
   "Return a list of paths from the file FILENAME and directory FILENAME.d.
 If it exists, the content of the file FILENAME is returned first,
 followed by the content of each file in the FILENAME.d directory.
@@ -104,8 +104,7 @@ are ignored."
 ;;;###autoload
 (defun path-helper-setenv (variable)
   "Set the value of environment variable VARIABLE from its associated files.
-Get a list of paths from '/etc/VARIABLEs' and '/etc/VARIABLEs.d/'
-using `path-helper-paths-from-files'.
+Get a list of paths from '/etc/VARIABLEs' and '/etc/VARIABLEs.d/'.
 
 The existing content of the environment variable VARIABLE is also
 read, and paths not already found in the configuration files are
@@ -118,7 +117,7 @@ As a special case, setting variable 'PATH' also sets `exec-path'."
   (let ((filename (concat "/etc/" (downcase variable) "s"))
         (existing-paths (split-string (or (getenv variable) "")
                                       path-separator)))
-    (let ((paths (delete-dups (append (path-helper-paths-from-files filename)
+    (let ((paths (delete-dups (append (path-helper--paths-from-files filename)
                                       existing-paths))))
       (setenv variable (mapconcat #'identity paths path-separator))
       (when (string-equal "PATH" variable)
