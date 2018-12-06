@@ -27,6 +27,14 @@ path-helper. But properly configured macOS packages such as
 [MacTeX](http://www.tug.org/mactex/), which contribute to the PATH by adding
 a file in `/etc/paths.d/`, will work as expected.
 
+## Installation
+
+Path-helper is available from [MELPA](https://melpa.org/#/path-helper) and
+[MELPA Stable](https://stable.melpa.org/#/path-helper). Once MELPA is
+[configured](https://melpa.org/#/getting-started), simply run:
+
+    M-x package-install RET path-helper RET
+
 ## Usage
 
 To set all environment variables listed in `path-helper-variables`, add the
