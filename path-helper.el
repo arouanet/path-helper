@@ -84,6 +84,12 @@
   :type '(repeat (string :tag "Environment variable"))
   :group 'path-helper)
 
+(defun path-helper--file-lines (filename)
+  "Return a list of non-empty lines from the file FILENAME."
+  (with-temp-buffer
+    (insert-file-contents filename)
+    (split-string (buffer-string) "\n" t)))
+
 (defun path-helper--paths-from-files (filename)
   "Return a list of paths from the file FILENAME and directory FILENAME.d.
 If it exists, the content of the file FILENAME is returned first,
@@ -91,15 +97,15 @@ followed by the content of each file in the FILENAME.d directory.
 
 The files should contain one path element per line.  Empty lines
 are ignored."
-  (with-temp-buffer
-    (let ((directory (concat filename ".d")))
-      (when (file-directory-p directory)
-        (dolist (file (directory-files directory t
-                                       directory-files-no-dot-files-regexp t))
-          (insert-file-contents file))))
-    (when (file-exists-p filename)
-      (insert-file-contents filename))
-    (split-string (buffer-string) "\n" t)))
+  (append
+   (when (file-exists-p filename)
+     (path-helper--file-lines filename))
+   (let ((directory (concat filename ".d")))
+     (when (file-directory-p directory)
+       (mapcan
+        'path-helper--file-lines
+        (reverse (directory-files directory t
+                                  directory-files-no-dot-files-regexp t)))))))
 
 ;;;###autoload
 (defun path-helper-setenv (variable)
