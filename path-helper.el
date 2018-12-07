@@ -121,10 +121,11 @@ As a special case, setting variable 'PATH' also sets `exec-path'."
    (list
     (completing-read "Set environment variable: " path-helper-variables)))
   (let ((filename (concat "/etc/" (downcase variable) "s"))
-        (existing-paths (split-string (or (getenv variable) "")
-                                      path-separator)))
-    (let ((paths (delete-dups (append (path-helper--paths-from-files filename)
-                                      existing-paths))))
+        (existing-value (getenv variable)))
+    (let ((paths (delete-dups
+                  (append (path-helper--paths-from-files filename)
+                          (when existing-value
+                            (split-string existing-value path-separator))))))
       (setenv variable (mapconcat #'identity paths path-separator))
       (when (string-equal "PATH" variable)
         (setq exec-path (append (mapcar #'file-name-as-directory paths)
