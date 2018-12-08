@@ -4,7 +4,7 @@
 
 ;; Author: Arnaud Rouanet <arnaud@rouanet.org>
 ;; Created: 29 Oct 2018
-;; Version: 1.0
+;; Version: 1.1
 ;; Keywords: tools, unix
 ;; Homepage: https://github.com/arouanet/path-helper
 ;; Package-Requires: ((emacs "24"))
