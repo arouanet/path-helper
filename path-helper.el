@@ -63,8 +63,11 @@
 ;;       :config
 ;;       (path-helper-setenv-all))
 
-;; The list `path-helper-variables' is set to ("PATH" "MANPATH") by
-;; default, but you can customize it to just ("PATH") for example.
+;; If `path-helper-skip-undefined-variables' is non-nil (default),
+;; environment variables are only set to a new value when they were
+;; previously set.  This is because MANPATH is generally unset by
+;; default, and it is preferable to leave it unset and let `man' use its
+;; more sophisticated method of finding manual page files.
 
 ;; You can also call `path-helper-setenv' directly to set a single
 ;; environment variable, e.g.:
@@ -78,10 +81,14 @@
   :prefix "path-helper-"
   :group 'unix)
 
-(defcustom path-helper-variables
-  '("PATH" "MANPATH")
-  "The list of environment variables set by `path-helper-setenv-all'."
+(defcustom path-helper-variables '("PATH" "MANPATH")
+  "The list of variables potentially set by `path-helper-setenv-all'."
   :type '(repeat (string :tag "Environment variable"))
+  :group 'path-helper)
+
+(defcustom path-helper-skip-undefined-variables t
+  "If non-nil, only existing variables are set by `path-helper-setenv-all'."
+  :type 'boolean
   :group 'path-helper)
 
 (defun path-helper--file-lines (filename)
@@ -134,10 +141,16 @@ As a special case, setting variable 'PATH' also sets `exec-path'."
 ;;;###autoload
 (defun path-helper-setenv-all ()
   "Set the value of all environment variables in `path-helper-variables'.
-Repeatedly call `path-helper-setenv' with each variable."
+Repeatedly call `path-helper-setenv' with each variable.
+
+If `path-helper-skip-undefined-variables' is non-nil, environment
+variables are only set to a new value when they were previously
+set."
   (interactive)
   (dolist (variable path-helper-variables)
-    (path-helper-setenv variable)))
+    (when (or (not path-helper-skip-undefined-variables)
+              (getenv variable))
+      (path-helper-setenv variable))))
 
 (provide 'path-helper)
 

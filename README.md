@@ -51,8 +51,11 @@ Or, if using [use-package](https://github.com/jwiegley/use-package):
       :config
       (path-helper-setenv-all))
 
-The list `path-helper-variables` is set to `("PATH" "MANPATH")` by default, but
-you can customize it to just `("PATH")` for example.
+If `path-helper-skip-undefined-variables` is non-nil (default), environment
+variables are only set to a new value when they were previously set. This is
+because `MANPATH` is generally unset by default, and it is preferable to leave
+it unset and let `man` use its more sophisticated method of finding manual page
+files.
 
 You can also call `path-helper-setenv` directly to set a single environment
 variable, e.g.:
